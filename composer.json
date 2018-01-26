@@ -1,0 +1,15 @@
+{
+    "name": "Paysera/lib-checkout-client",
+    "description": "PHP REST Client for Paysera Checkout",
+    "autoload": {
+        "psr-4": {
+            "Paysera\\Client\\CheckoutClient\\": "src"
+        }
+    },
+    "require": {
+        "php": ">=5.5",
+        "paysera/lib-rest-client-common": "^1.0",
+        "fig/http-message-util": "^1.0"
+    },
+    "minimum-stability": "stable"
+}
