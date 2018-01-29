@@ -4,7 +4,7 @@ namespace Paysera\Client\CheckoutClient\Entity;
 
 use Paysera\Component\RestClientCommon\Entity\Entity;
 
-class PaymentRequestMethodFilter extends Entity
+class PaymentRequestFilter extends Entity
 {
     /**
      * @return string|null

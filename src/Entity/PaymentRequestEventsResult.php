@@ -1,6 +1,6 @@
 <?php
 
-namespace Paysera\Client\ClientCheckout\Entity;
+namespace Paysera\Client\CheckoutClient\Entity;
 
 use Paysera\Component\RestClientCommon\Entity\Result;
 

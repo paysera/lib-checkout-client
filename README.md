@@ -9,7 +9,7 @@ It automatically authenticates all requests and maps required data structure for
 This library provides `ClientFactory` class, which you should use to get the API client itself:
 
 ```php
-use Paysera\Client\ClientCheckout\ClientFactory;
+use Paysera\Client\CheckoutClient\ClientFactory;
 
 $clientFactory = ClientFactory::create([
     'base_url' => 'https://checkout-eu-a.paysera.com/checkout/rest/v1', // optional, in case you need a custom one.
@@ -39,7 +39,7 @@ Update payment request customer email.
 
 
 ```php
-use Paysera\Client\ClientCheckout\Entity as Entities;
+use Paysera\Client\CheckoutClient\Entity as Entities;
 
 $email = new Entities\Email();
 
@@ -54,7 +54,7 @@ Standard SQL-style Result filtering
 
 
 ```php
-use Paysera\Client\ClientCheckout\Entity as Entities;
+use Paysera\Client\CheckoutClient\Entity as Entities;
 
 $paymentRequestMethodFilter = new Entities\PaymentRequestMethodFilter();
 
@@ -69,7 +69,7 @@ Start payment and return flow data
 
 
 ```php
-use Paysera\Client\ClientCheckout\Entity as Entities;
+use Paysera\Client\CheckoutClient\Entity as Entities;
 
 $paymentMethod = new Entities\PaymentMethod();
 
@@ -84,7 +84,7 @@ Authorize PaymentRequest with already issued Token
 
 
 ```php
-use Paysera\Client\ClientCheckout\Entity as Entities;
+use Paysera\Client\CheckoutClient\Entity as Entities;
 
 $authorizationParameters = new Entities\AuthorizationParameters();
 
@@ -119,7 +119,7 @@ Create payment request.
 
 
 ```php
-use Paysera\Client\ClientCheckout\Entity as Entities;
+use Paysera\Client\CheckoutClient\Entity as Entities;
 
 $paymentRequest = new Entities\PaymentRequest();
 
@@ -155,7 +155,7 @@ Standard SQL-style Result filtering
 
 
 ```php
-use Paysera\Client\ClientCheckout\Entity as Entities;
+use Paysera\Client\CheckoutClient\Entity as Entities;
 
 $paymentRequestFilter = new Entities\PaymentRequestFilter();
 
@@ -190,7 +190,7 @@ Standard SQL-style Result filtering
 
 
 ```php
-use Paysera\Client\ClientCheckout\Entity as Entities;
+use Paysera\Client\CheckoutClient\Entity as Entities;
 
 $paymentRequestEventFilter = new Entities\PaymentRequestEventFilter();
 
