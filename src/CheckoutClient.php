@@ -1,8 +1,8 @@
 <?php
 
-namespace Paysera\Client\ClientCheckout;
+namespace Paysera\Client\CheckoutClient;
 
-use Paysera\Client\ClientCheckout\Entity as Entities;
+use Paysera\Client\CheckoutClient\Entity as Entities;
 use Fig\Http\Message\RequestMethodInterface;
 use Paysera\Component\RestClientCommon\Client\ApiClient;
 
