@@ -1,8 +1,8 @@
 <?php
 
-namespace Paysera\Client\CheckoutClient;
+namespace Paysera\Client\ClientCheckout;
 
-use Paysera\Client\CheckoutClient\Entity as Entities;
+use Paysera\Client\ClientCheckout\Entity as Entities;
 use Fig\Http\Message\RequestMethodInterface;
 use Paysera\Component\RestClientCommon\Client\ApiClient;
 
@@ -56,7 +56,7 @@ class CheckoutClient
     }
 
     /**
-     * Start payment and return processing data
+     * Start payment and return flow data
      * PUT /payment-requests/{id}/start-payment
      *
      * @param string $id

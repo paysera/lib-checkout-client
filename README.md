@@ -1,5 +1,5 @@
 
-## lib-checkout-client
+## vendor-checkout-client
 
 Provides methods to manipulate `Checkout` API.
 It automatically authenticates all requests and maps required data structure for you.
@@ -9,10 +9,10 @@ It automatically authenticates all requests and maps required data structure for
 This library provides `ClientFactory` class, which you should use to get the API client itself:
 
 ```php
-use Paysera\Client\CheckoutClient\ClientFactory;
+use Paysera\Client\ClientCheckout\ClientFactory;
 
 $clientFactory = ClientFactory::create([
-    'base_url' => 'https://checkout.paysera.com', // optional, in case you need a custom one.
+    'base_url' => 'https://checkout-eu-a.paysera.com/checkout/rest/v1', // optional, in case you need a custom one.
     'basic' => [                                        // use this, it API requires Basic authentication.
         'username' => 'username',
         'password' => 'password',
@@ -39,7 +39,7 @@ Update payment request customer email.
 
 
 ```php
-use Paysera\Client\CheckoutClient\Entity as Entities;
+use Paysera\Client\ClientCheckout\Entity as Entities;
 
 $email = new Entities\Email();
 
@@ -54,7 +54,7 @@ Standard SQL-style Result filtering
 
 
 ```php
-use Paysera\Client\CheckoutClient\Entity as Entities;
+use Paysera\Client\ClientCheckout\Entity as Entities;
 
 $paymentRequestMethodFilter = new Entities\PaymentRequestMethodFilter();
 
@@ -65,11 +65,11 @@ $result = $checkoutClient->getPaymentRequestMethods($id, $paymentRequestMethodFi
 ---
 
 
-Start payment and return processing data
+Start payment and return flow data
 
 
 ```php
-use Paysera\Client\CheckoutClient\Entity as Entities;
+use Paysera\Client\ClientCheckout\Entity as Entities;
 
 $paymentMethod = new Entities\PaymentMethod();
 
@@ -84,7 +84,7 @@ Authorize PaymentRequest with already issued Token
 
 
 ```php
-use Paysera\Client\CheckoutClient\Entity as Entities;
+use Paysera\Client\ClientCheckout\Entity as Entities;
 
 $authorizationParameters = new Entities\AuthorizationParameters();
 
@@ -119,7 +119,7 @@ Create payment request.
 
 
 ```php
-use Paysera\Client\CheckoutClient\Entity as Entities;
+use Paysera\Client\ClientCheckout\Entity as Entities;
 
 $paymentRequest = new Entities\PaymentRequest();
 
@@ -155,7 +155,7 @@ Standard SQL-style Result filtering
 
 
 ```php
-use Paysera\Client\CheckoutClient\Entity as Entities;
+use Paysera\Client\ClientCheckout\Entity as Entities;
 
 $paymentRequestFilter = new Entities\PaymentRequestFilter();
 
@@ -190,7 +190,7 @@ Standard SQL-style Result filtering
 
 
 ```php
-use Paysera\Client\CheckoutClient\Entity as Entities;
+use Paysera\Client\ClientCheckout\Entity as Entities;
 
 $paymentRequestEventFilter = new Entities\PaymentRequestEventFilter();
 

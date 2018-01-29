@@ -1,13 +1,13 @@
 <?php
 
-namespace Paysera\Client\CheckoutClient;
+namespace Paysera\Client\ClientCheckout;
 
 use Paysera\Component\RestClientCommon\Client\ApiClient;
 use Paysera\Component\RestClientCommon\Util\ClientFactoryAbstract;
 
 class ClientFactory extends ClientFactoryAbstract
 {
-    const DEFAULT_BASE_URL = 'https://checkout.paysera.com/';
+    const DEFAULT_BASE_URL = 'https://checkout-a.paysera.com/checkout/rest/v1/';
 
     private $apiClient;
 
