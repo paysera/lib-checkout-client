@@ -1,5 +1,5 @@
 {
-    "name": "Paysera/lib-checkout-client",
+    "name": "paysera/lib-checkout-client",
     "description": "PHP REST Client for Paysera Checkout",
     "autoload": {
         "psr-4": {
