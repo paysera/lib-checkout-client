@@ -4,10 +4,10 @@ namespace Paysera\Client\CheckoutClient\Entity;
 
 use Paysera\Component\RestClientCommon\Entity\Result;
 
-class PaymentRequestEventsResult extends Result
+class PaymentRequestResult extends Result
 {
     protected function createItem(array $data)
     {
-        return new PaymentRequestEvent($data);
+        return new PaymentRequest($data);
     }
 }

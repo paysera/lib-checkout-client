@@ -1,5 +1,5 @@
 
-## lib-checkout-client
+## vendor-checkout-client
 
 Provides methods to manipulate `Checkout` API.
 It automatically authenticates all requests and maps required data structure for you.
@@ -12,7 +12,7 @@ This library provides `ClientFactory` class, which you should use to get the API
 use Paysera\Client\CheckoutClient\ClientFactory;
 
 $clientFactory = ClientFactory::create([
-    'base_url' => 'https://checkout-eu-a.paysera.com/checkout/rest/v1', // optional, in case you need a custom one.
+    'base_url' => 'https://checkout-eu-a.paysera.com/checkout/rest/v1/', // optional, in case you need a custom one.
     'basic' => [                                        // use this, it API requires Basic authentication.
         'username' => 'username',
         'password' => 'password',
@@ -35,7 +35,7 @@ Now, that you have instance of `CheckoutClient`, you can use following methods
 ### Methods
 
     
-Update payment request customer email.
+Update payment request customer email
 
 
 ```php
@@ -45,22 +45,25 @@ $email = new Entities\Email();
 
 $email->setEmail($email);
     
-$result = $checkoutClient->updatePaymentRequestSetEmail($id, $email);
+$result = $checkoutClient->setPaymentRequestEmail($id, $email);
 ```
 ---
 
 
-Standard SQL-style Result filtering
+Get payment methods for a payment request
 
 
 ```php
 use Paysera\Client\CheckoutClient\Entity as Entities;
 
-$paymentRequestMethodFilter = new Entities\PaymentRequestMethodFilter();
+$filter = new Entities\Filter();
 
-$paymentRequestMethodFilter->setDummy($dummy);
+$filter->setLimit($limit);
+$filter->setOffset($offset);
+$filter->setOrderBy($orderBy);
+$filter->setOrderDirection($orderDirection);
     
-$result = $checkoutClient->getPaymentRequestMethods($id, $paymentRequestMethodFilter);
+$result = $checkoutClient->getPaymentRequestMethods($id, $filter);
 ```
 ---
 
@@ -105,7 +108,7 @@ $result = $checkoutClient->capturePaymentRequest($id);
 ---
 
 
-Get payment request.
+Get payment request
 
 
 ```php
@@ -115,7 +118,7 @@ $result = $checkoutClient->getPaymentRequest($id);
 ---
 
 
-Create payment request.
+Create payment request
 
 
 ```php
@@ -151,7 +154,7 @@ $result = $checkoutClient->createPaymentRequest($paymentRequest);
 ```
 ---
 
-Standard SQL-style Result filtering
+Payment request result filter
 
 
 ```php
@@ -159,44 +162,11 @@ use Paysera\Client\CheckoutClient\Entity as Entities;
 
 $paymentRequestFilter = new Entities\PaymentRequestFilter();
 
-$paymentRequestFilter->setDummy($dummy);
+$paymentRequestFilter->setBusinessId($businessId);
+$paymentRequestFilter->setStatus($status);
+$paymentRequestFilter->setMethodKey($methodKey);
     
 $result = $checkoutClient->getPaymentRequests($paymentRequestFilter);
-```
----
-
-    
-Set status that event was read/processed successfully.
-
-
-```php
-
-$result = $checkoutClient->readEvent($id);
-```
----
-
-
-Get event.
-
-
-```php
-
-$result = $checkoutClient->getEvent($id);
-```
----
-
-
-Standard SQL-style Result filtering
-
-
-```php
-use Paysera\Client\CheckoutClient\Entity as Entities;
-
-$paymentRequestEventFilter = new Entities\PaymentRequestEventFilter();
-
-$paymentRequestEventFilter->setDummy($dummy);
-    
-$result = $checkoutClient->getEvents($paymentRequestEventFilter);
 ```
 ---
 

@@ -16,14 +16,14 @@ class CheckoutClient
     }
 
     /**
-     * Update payment request customer email.
+     * Update payment request customer email
      * PUT /payment-requests/{id}/set-email
      *
      * @param string $id
      * @param Entities\Email $email
      * @return Entities\PaymentRequest
      */
-    public function updatePaymentRequestSetEmail($id, Entities\Email $email)
+    public function setPaymentRequestEmail($id, Entities\Email $email)
     {
         $request = $this->apiClient->createRequest(
             RequestMethodInterface::METHOD_PUT,
@@ -36,23 +36,23 @@ class CheckoutClient
     }
 
     /**
-     * Standard SQL-style Result filtering
+     * Get payment methods for a payment request
      * GET /payment-requests/{id}/methods
      *
      * @param string $id
-     * @param Entities\PaymentRequestMethodFilter $paymentRequestMethodFilter
-     * @return Entities\PaymentRequestMethodsResult
+     * @param Entities\Filter $filter
+     * @return Entities\PaymentRequestMethodResult
      */
-    public function getPaymentRequestMethods($id, Entities\PaymentRequestMethodFilter $paymentRequestMethodFilter)
+    public function getPaymentRequestMethods($id, Entities\Filter $filter)
     {
         $request = $this->apiClient->createRequest(
             RequestMethodInterface::METHOD_GET,
             sprintf('payment-requests/%s/methods', urlencode($id)),
-            $paymentRequestMethodFilter
+            $filter
         );
         $data = $this->apiClient->makeRequest($request);
 
-        return new Entities\PaymentRequestMethodsResult($data, 'items');
+        return new Entities\PaymentRequestMethodResult($data, 'items');
     }
 
     /**
@@ -115,7 +115,7 @@ class CheckoutClient
     }
 
     /**
-     * Get payment request.
+     * Get payment request
      * GET /payment-requests/{id}
      *
      * @param string $id
@@ -134,7 +134,7 @@ class CheckoutClient
     }
 
     /**
-     * Create payment request.
+     * Create payment request
      * POST /payment-requests
      *
      * @param Entities\PaymentRequest $paymentRequest
@@ -152,11 +152,11 @@ class CheckoutClient
         return new Entities\PaymentRequest($data);
     }
     /**
-     * Standard SQL-style Result filtering
+     * Payment request result filter
      * GET /payment-requests
      *
      * @param Entities\PaymentRequestFilter $paymentRequestFilter
-     * @return Entities\PaymentRequestsResult
+     * @return Entities\PaymentRequestResult
      */
     public function getPaymentRequests(Entities\PaymentRequestFilter $paymentRequestFilter)
     {
@@ -167,64 +167,7 @@ class CheckoutClient
         );
         $data = $this->apiClient->makeRequest($request);
 
-        return new Entities\PaymentRequestsResult($data, 'items');
-    }
-
-    /**
-     * Set status that event was read/processed successfully.
-     * PUT /events/{id}/read
-     *
-     * @param string $id
-     * @return Entities\PaymentRequestEvent
-     */
-    public function readEvent($id)
-    {
-        $request = $this->apiClient->createRequest(
-            RequestMethodInterface::METHOD_PUT,
-            sprintf('events/%s/read', urlencode($id)),
-            null
-        );
-        $data = $this->apiClient->makeRequest($request);
-
-        return new Entities\PaymentRequestEvent($data);
-    }
-
-    /**
-     * Get event.
-     * GET /events/{id}
-     *
-     * @param string $id
-     * @return Entities\PaymentRequestEvent
-     */
-    public function getEvent($id)
-    {
-        $request = $this->apiClient->createRequest(
-            RequestMethodInterface::METHOD_GET,
-            sprintf('events/%s', urlencode($id)),
-            null
-        );
-        $data = $this->apiClient->makeRequest($request);
-
-        return new Entities\PaymentRequestEvent($data);
-    }
-
-    /**
-     * Standard SQL-style Result filtering
-     * GET /events
-     *
-     * @param Entities\PaymentRequestEventFilter $paymentRequestEventFilter
-     * @return Entities\PaymentRequestEventsResult
-     */
-    public function getEvents(Entities\PaymentRequestEventFilter $paymentRequestEventFilter)
-    {
-        $request = $this->apiClient->createRequest(
-            RequestMethodInterface::METHOD_GET,
-            'events',
-            $paymentRequestEventFilter
-        );
-        $data = $this->apiClient->makeRequest($request);
-
-        return new Entities\PaymentRequestEventsResult($data, 'items');
+        return new Entities\PaymentRequestResult($data, 'items');
     }
 
 }
