@@ -1,5 +1,5 @@
 
-## vendor-checkout-client
+## paysera-checkout-client
 
 Provides methods to manipulate `Checkout` API.
 It automatically authenticates all requests and maps required data structure for you.
