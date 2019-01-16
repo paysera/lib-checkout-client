@@ -151,6 +151,26 @@ class CheckoutClient
 
         return new Entities\PaymentRequest($data);
     }
+
+    /**
+     * Cancel payment request
+     * PUT /payment-requests/{id}/cancel
+     *
+     * @param string $id
+     * @return Entities\PaymentRequest
+     */
+    public function cancelPaymentRequest($id)
+    {
+        $request = $this->apiClient->createRequest(
+            RequestMethodInterface::METHOD_PUT,
+            sprintf('payment-requests/%s/cancel', urlencode($id)),
+            null
+        );
+        $data = $this->apiClient->makeRequest($request);
+
+        return new Entities\PaymentRequest($data);
+    }
+
     /**
      * Payment request result filter
      * GET /payment-requests
@@ -169,5 +189,4 @@ class CheckoutClient
 
         return new Entities\PaymentRequestResult($data, 'items');
     }
-
 }
