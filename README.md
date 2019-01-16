@@ -154,6 +154,15 @@ $result = $checkoutClient->createPaymentRequest($paymentRequest);
 ```
 ---
 
+Cancel payment request
+
+
+```php
+
+$result = $checkoutClient->cancelPaymentRequest($id);
+```
+---
+
 Payment request result filter
 
 
