@@ -9,6 +9,11 @@ class PaymentRequestMethod extends Entity
     const STATUS_ENABLED = 'enabled';
     const STATUS_DISABLED = 'disabled';
 
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+    }
+
     /**
      * @return string
      */
@@ -16,6 +21,7 @@ class PaymentRequestMethod extends Entity
     {
         return $this->get('key');
     }
+
     /**
      * @param string $key
      * @return $this
@@ -25,6 +31,7 @@ class PaymentRequestMethod extends Entity
         $this->set('key', $key);
         return $this;
     }
+
     /**
      * @return string[]|null
      */
@@ -32,6 +39,7 @@ class PaymentRequestMethod extends Entity
     {
         return $this->get('countries');
     }
+
     /**
      * @param string[] $countries
      * @return $this
@@ -41,6 +49,7 @@ class PaymentRequestMethod extends Entity
         $this->set('countries', $countries);
         return $this;
     }
+
     /**
      * @return string
      */
@@ -48,6 +57,7 @@ class PaymentRequestMethod extends Entity
     {
         return $this->get('group_key');
     }
+
     /**
      * @param string $groupKey
      * @return $this
@@ -57,6 +67,7 @@ class PaymentRequestMethod extends Entity
         $this->set('group_key', $groupKey);
         return $this;
     }
+
     /**
      * @return string
      */
@@ -64,6 +75,7 @@ class PaymentRequestMethod extends Entity
     {
         return $this->get('logo_url');
     }
+
     /**
      * @param string $logoUrl
      * @return $this
@@ -73,6 +85,7 @@ class PaymentRequestMethod extends Entity
         $this->set('logo_url', $logoUrl);
         return $this;
     }
+
     /**
      * @return BasicInformation[]
      */
@@ -90,6 +103,7 @@ class PaymentRequestMethod extends Entity
 
         return $list;
     }
+
     /**
      * @param BasicInformation[] $basicInformation
      * @return $this
@@ -110,6 +124,7 @@ class PaymentRequestMethod extends Entity
     {
         return $this->get('gateway');
     }
+
     /**
      * @param string $gateway
      * @return $this
@@ -119,6 +134,7 @@ class PaymentRequestMethod extends Entity
         $this->set('gateway', $gateway);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -126,6 +142,7 @@ class PaymentRequestMethod extends Entity
     {
         return $this->get('status');
     }
+
     /**
      * @param string $status
      * @return $this

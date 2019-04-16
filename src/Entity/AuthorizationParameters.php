@@ -6,6 +6,11 @@ use Paysera\Component\RestClientCommon\Entity\Entity;
 
 class AuthorizationParameters extends Entity
 {
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+    }
+
     /**
      * @return string
      */
@@ -13,6 +18,7 @@ class AuthorizationParameters extends Entity
     {
         return $this->get('token');
     }
+    
     /**
      * @param string $token
      * @return $this

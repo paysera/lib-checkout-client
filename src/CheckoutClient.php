@@ -5,6 +5,8 @@ namespace Paysera\Client\CheckoutClient;
 use Paysera\Client\CheckoutClient\Entity as Entities;
 use Fig\Http\Message\RequestMethodInterface;
 use Paysera\Component\RestClientCommon\Client\ApiClient;
+use Paysera\Component\RestClientCommon\Entity\Filter;
+use Evp\Component\Money\Money;
 
 class CheckoutClient
 {
@@ -13,6 +15,49 @@ class CheckoutClient
     public function __construct(ApiClient $apiClient)
     {
         $this->apiClient = $apiClient;
+    }
+
+    public function withOptions(array $options)
+    {
+        return new self($this->apiClient->withOptions($options));
+    }
+
+    /**
+     * Cancel payment request
+     * PUT /payment-requests/{id}/cancel
+     *
+     * @param string $id
+     * @return Entities\PaymentRequest
+     */
+    public function cancelPaymentRequest($id)
+    {
+        $request = $this->apiClient->createRequest(
+            RequestMethodInterface::METHOD_PUT,
+            sprintf('payment-requests/%s/cancel', urlencode($id)),
+            null
+        );
+        $data = $this->apiClient->makeRequest($request);
+
+        return new Entities\PaymentRequest($data);
+    }
+
+    /**
+     * Get payment request public info
+     * GET /payment-requests/{id}/public-info
+     *
+     * @param string $id
+     * @return Entities\PaymentRequest
+     */
+    public function getPaymentRequestPublicInfo($id)
+    {
+        $request = $this->apiClient->createRequest(
+            RequestMethodInterface::METHOD_GET,
+            sprintf('payment-requests/%s/public-info', urlencode($id)),
+            null
+        );
+        $data = $this->apiClient->makeRequest($request);
+
+        return new Entities\PaymentRequest($data);
     }
 
     /**
@@ -40,10 +85,10 @@ class CheckoutClient
      * GET /payment-requests/{id}/methods
      *
      * @param string $id
-     * @param Entities\Filter $filter
+     * @param Filter $filter
      * @return Entities\PaymentRequestMethodResult
      */
-    public function getPaymentRequestMethods($id, Entities\Filter $filter)
+    public function getPaymentRequestMethods($id, Filter $filter)
     {
         $request = $this->apiClient->createRequest(
             RequestMethodInterface::METHOD_GET,
@@ -146,25 +191,6 @@ class CheckoutClient
             RequestMethodInterface::METHOD_POST,
             'payment-requests',
             $paymentRequest
-        );
-        $data = $this->apiClient->makeRequest($request);
-
-        return new Entities\PaymentRequest($data);
-    }
-
-    /**
-     * Cancel payment request
-     * PUT /payment-requests/{id}/cancel
-     *
-     * @param string $id
-     * @return Entities\PaymentRequest
-     */
-    public function cancelPaymentRequest($id)
-    {
-        $request = $this->apiClient->createRequest(
-            RequestMethodInterface::METHOD_PUT,
-            sprintf('payment-requests/%s/cancel', urlencode($id)),
-            null
         );
         $data = $this->apiClient->makeRequest($request);
 

@@ -6,6 +6,11 @@ use Paysera\Component\RestClientCommon\Entity\Entity;
 
 class PaymentMethod extends Entity
 {
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+    }
+
     /**
      * @return string
      */
@@ -13,6 +18,7 @@ class PaymentMethod extends Entity
     {
         return $this->get('method_key');
     }
+
     /**
      * @param string $methodKey
      * @return $this

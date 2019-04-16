@@ -6,6 +6,11 @@ use Paysera\Component\RestClientCommon\Entity\Entity;
 
 class InformationRequest extends Entity
 {
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+    }
+
     /**
      * @return string|null
      */
@@ -13,6 +18,7 @@ class InformationRequest extends Entity
     {
         return $this->get('personal_code');
     }
+
     /**
      * @param string $personalCode
      * @return $this

@@ -77,5 +77,4 @@ class Filter extends Entity
         $this->set('order_direction', $orderDirection);
         return $this;
     }
-
 }
