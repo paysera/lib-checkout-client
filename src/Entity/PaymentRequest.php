@@ -2,10 +2,21 @@
 
 namespace Paysera\Client\CheckoutClient\Entity;
 
+use Evp\Component\Money\Money;
 use Paysera\Component\RestClientCommon\Entity\Entity;
 
 class PaymentRequest extends Entity
 {
+    const STATUS_NEW = 'new';
+    const STATUS_AUTHORIZED = 'authorized';
+    const STATUS_CAPTURED = 'captured';
+    const STATUS_CANCELED = 'canceled';
+
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+    }
+
     /**
      * @return string|null
      */
@@ -13,6 +24,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('id');
     }
+
     /**
      * @param string $id
      * @return $this
@@ -22,6 +34,7 @@ class PaymentRequest extends Entity
         $this->set('id', $id);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -29,6 +42,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('status');
     }
+
     /**
      * @param string $status
      * @return $this
@@ -38,6 +52,7 @@ class PaymentRequest extends Entity
         $this->set('status', $status);
         return $this;
     }
+
     /**
      * @return string
      */
@@ -45,6 +60,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('business_id');
     }
+
     /**
      * @param string $businessId
      * @return $this
@@ -54,6 +70,7 @@ class PaymentRequest extends Entity
         $this->set('business_id', $businessId);
         return $this;
     }
+
     /**
      * @return string
      */
@@ -61,6 +78,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('order_id');
     }
+
     /**
      * @param string $orderId
      * @return $this
@@ -70,6 +88,7 @@ class PaymentRequest extends Entity
         $this->set('order_id', $orderId);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -77,6 +96,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('unique_identifier');
     }
+
     /**
      * @param string $uniqueIdentifier
      * @return $this
@@ -86,38 +106,46 @@ class PaymentRequest extends Entity
         $this->set('unique_identifier', $uniqueIdentifier);
         return $this;
     }
+
     /**
      * @return Money
      */
     public function getPrice()
     {
-        return (new Money())->setDataByReference($this->getByReference('price'));
+        return new Money($this->get('price')['amount'], $this->get('price')['currency']);
     }
+
     /**
      * @param Money $price
      * @return $this
      */
     public function setPrice(Money $price)
     {
-        $this->setByReference('price', $price->getDataByReference());
+        $this->set('price', ['amount' => $price->getAmount(), 'currency' => $price->getCurrency()]);
         return $this;
     }
+
     /**
      * @return Money|null
      */
     public function getPricePaid()
     {
-        return (new Money())->setDataByReference($this->getByReference('price_paid'));
+        if (!isset($this->get('price_paid')['amount']) || !isset($this->get('price_paid')['currency'])) {
+            return null;
+        }
+        return new Money($this->get('price_paid')['amount'], $this->get('price_paid')['currency']);
     }
+
     /**
      * @param Money $pricePaid
      * @return $this
      */
     public function setPricePaid(Money $pricePaid)
     {
-        $this->setByReference('price_paid', $pricePaid->getDataByReference());
+        $this->set('price_paid', ['amount' => $pricePaid->getAmount(), 'currency' => $pricePaid->getCurrency()]);
         return $this;
     }
+
     /**
      * @return integer|null
      */
@@ -125,6 +153,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('valid_until');
     }
+
     /**
      * @param integer $validUntil
      * @return $this
@@ -134,6 +163,7 @@ class PaymentRequest extends Entity
         $this->set('valid_until', $validUntil);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -141,6 +171,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('locale');
     }
+
     /**
      * @param string $locale
      * @return $this
@@ -150,6 +181,7 @@ class PaymentRequest extends Entity
         $this->set('locale', $locale);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -157,6 +189,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('description');
     }
+
     /**
      * @param string $description
      * @return $this
@@ -166,6 +199,7 @@ class PaymentRequest extends Entity
         $this->set('description', $description);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -173,6 +207,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('method_country');
     }
+
     /**
      * @param string $methodCountry
      * @return $this
@@ -182,6 +217,7 @@ class PaymentRequest extends Entity
         $this->set('method_country', $methodCountry);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -189,6 +225,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('method_key');
     }
+
     /**
      * @param string $methodKey
      * @return $this
@@ -198,13 +235,18 @@ class PaymentRequest extends Entity
         $this->set('method_key', $methodKey);
         return $this;
     }
+
     /**
      * @return Payer|null
      */
     public function getPayer()
     {
+        if ($this->get('payer') === null) {
+            return null;
+        }
         return (new Payer())->setDataByReference($this->getByReference('payer'));
     }
+
     /**
      * @param Payer $payer
      * @return $this
@@ -214,13 +256,39 @@ class PaymentRequest extends Entity
         $this->setByReference('payer', $payer->getDataByReference());
         return $this;
     }
+
+    /**
+     * @return ContactInfo|null
+     */
+    public function getContactInfo()
+    {
+        if ($this->get('contact_info') === null) {
+            return null;
+        }
+        return (new ContactInfo())->setDataByReference($this->getByReference('contact_info'));
+    }
+
+    /**
+     * @param ContactInfo $contactInfo
+     * @return $this
+     */
+    public function setContactInfo(ContactInfo $contactInfo)
+    {
+        $this->setByReference('contact_info', $contactInfo->getDataByReference());
+        return $this;
+    }
+
     /**
      * @return InformationRequest|null
      */
     public function getInformationRequest()
     {
+        if ($this->get('information_request') === null) {
+            return null;
+        }
         return (new InformationRequest())->setDataByReference($this->getByReference('information_request'));
     }
+
     /**
      * @param InformationRequest $informationRequest
      * @return $this
@@ -230,13 +298,18 @@ class PaymentRequest extends Entity
         $this->setByReference('information_request', $informationRequest->getDataByReference());
         return $this;
     }
+
     /**
      * @return CardDataRestriction|null
      */
     public function getCardDataRestriction()
     {
+        if ($this->get('card_data_restriction') === null) {
+            return null;
+        }
         return (new CardDataRestriction())->setDataByReference($this->getByReference('card_data_restriction'));
     }
+
     /**
      * @param CardDataRestriction $cardDataRestriction
      * @return $this
@@ -246,6 +319,7 @@ class PaymentRequest extends Entity
         $this->setByReference('card_data_restriction', $cardDataRestriction->getDataByReference());
         return $this;
     }
+
     /**
      * @return string
      */
@@ -253,6 +327,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('accept_url');
     }
+
     /**
      * @param string $acceptUrl
      * @return $this
@@ -262,6 +337,7 @@ class PaymentRequest extends Entity
         $this->set('accept_url', $acceptUrl);
         return $this;
     }
+
     /**
      * @return string
      */
@@ -269,6 +345,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('cancel_url');
     }
+
     /**
      * @param string $cancelUrl
      * @return $this
@@ -278,6 +355,7 @@ class PaymentRequest extends Entity
         $this->set('cancel_url', $cancelUrl);
         return $this;
     }
+
     /**
      * @return string
      */
@@ -285,6 +363,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('callback_url');
     }
+
     /**
      * @param string $callbackUrl
      * @return $this
@@ -294,6 +373,7 @@ class PaymentRequest extends Entity
         $this->set('callback_url', $callbackUrl);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -301,6 +381,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('authorization_url');
     }
+
     /**
      * @param string $authorizationUrl
      * @return $this
@@ -310,6 +391,7 @@ class PaymentRequest extends Entity
         $this->set('authorization_url', $authorizationUrl);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -317,6 +399,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('affiliate_key');
     }
+
     /**
      * @param string $affiliateKey
      * @return $this
@@ -326,6 +409,7 @@ class PaymentRequest extends Entity
         $this->set('affiliate_key', $affiliateKey);
         return $this;
     }
+
     /**
      * @return object|null
      */
@@ -333,15 +417,17 @@ class PaymentRequest extends Entity
     {
         return $this->getByReference('parameters');
     }
+
     /**
      * @param object $parameters
      * @return $this
      */
     public function setParameters($parameters)
     {
-        $this->set('parameters', $parameters);
+        $this->setByReference('parameters', $parameters);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -349,6 +435,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('token_strategy');
     }
+
     /**
      * @param string $tokenStrategy
      * @return $this
@@ -358,6 +445,7 @@ class PaymentRequest extends Entity
         $this->set('token_strategy', $tokenStrategy);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -365,6 +453,7 @@ class PaymentRequest extends Entity
     {
         return $this->get('issued_token');
     }
+
     /**
      * @param string $issuedToken
      * @return $this

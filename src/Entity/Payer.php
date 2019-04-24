@@ -6,6 +6,11 @@ use Paysera\Component\RestClientCommon\Entity\Entity;
 
 class Payer extends Entity
 {
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+    }
+
     /**
      * @return string|null
      */
@@ -13,6 +18,7 @@ class Payer extends Entity
     {
         return $this->get('name');
     }
+
     /**
      * @param string $name
      * @return $this
@@ -22,6 +28,7 @@ class Payer extends Entity
         $this->set('name', $name);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -29,6 +36,7 @@ class Payer extends Entity
     {
         return $this->get('surname');
     }
+
     /**
      * @param string $surname
      * @return $this
@@ -38,6 +46,7 @@ class Payer extends Entity
         $this->set('surname', $surname);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -45,6 +54,7 @@ class Payer extends Entity
     {
         return $this->get('full_name');
     }
+
     /**
      * @param string $fullName
      * @return $this
@@ -54,6 +64,7 @@ class Payer extends Entity
         $this->set('full_name', $fullName);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -61,6 +72,7 @@ class Payer extends Entity
     {
         return $this->get('personal_code');
     }
+
     /**
      * @param string $personalCode
      * @return $this
@@ -70,6 +82,7 @@ class Payer extends Entity
         $this->set('personal_code', $personalCode);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -77,6 +90,7 @@ class Payer extends Entity
     {
         return $this->get('email');
     }
+
     /**
      * @param string $email
      * @return $this
@@ -86,6 +100,7 @@ class Payer extends Entity
         $this->set('email', $email);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -93,6 +108,7 @@ class Payer extends Entity
     {
         return $this->get('ip');
     }
+
     /**
      * @param string $ip
      * @return $this
@@ -102,6 +118,7 @@ class Payer extends Entity
         $this->set('ip', $ip);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -109,6 +126,7 @@ class Payer extends Entity
     {
         return $this->get('ip_country');
     }
+
     /**
      * @param string $ipCountry
      * @return $this
@@ -118,6 +136,7 @@ class Payer extends Entity
         $this->set('ip_country', $ipCountry);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -125,6 +144,7 @@ class Payer extends Entity
     {
         return $this->get('account');
     }
+
     /**
      * @param string $account
      * @return $this

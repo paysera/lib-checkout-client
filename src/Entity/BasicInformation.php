@@ -6,6 +6,11 @@ use Paysera\Component\RestClientCommon\Entity\Entity;
 
 class BasicInformation extends Entity
 {
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+    }
+
     /**
      * @return string|null
      */
@@ -13,6 +18,7 @@ class BasicInformation extends Entity
     {
         return $this->get('language');
     }
+
     /**
      * @param string $language
      * @return $this
@@ -22,6 +28,7 @@ class BasicInformation extends Entity
         $this->set('language', $language);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -29,6 +36,7 @@ class BasicInformation extends Entity
     {
         return $this->get('title');
     }
+
     /**
      * @param string $title
      * @return $this
@@ -38,6 +46,7 @@ class BasicInformation extends Entity
         $this->set('title', $title);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -45,6 +54,7 @@ class BasicInformation extends Entity
     {
         return $this->get('description');
     }
+
     /**
      * @param string $description
      * @return $this

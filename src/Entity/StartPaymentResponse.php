@@ -10,6 +10,11 @@ class StartPaymentResponse extends Entity
     const TYPE_REDIRECT = 'redirect';
     const TYPE_CUSTOM = 'custom';
 
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+    }
+
     /**
      * @return string
      */
@@ -17,6 +22,7 @@ class StartPaymentResponse extends Entity
     {
         return $this->get('type');
     }
+
     /**
      * @param string $type
      * @return $this
@@ -26,13 +32,18 @@ class StartPaymentResponse extends Entity
         $this->set('type', $type);
         return $this;
     }
+
     /**
      * @return StartPaymentResponseData|null
      */
     public function getFlowData()
     {
+        if ($this->get('flow_data') === null) {
+            return null;
+        }
         return (new StartPaymentResponseData())->setDataByReference($this->getByReference('flow_data'));
     }
+
     /**
      * @param StartPaymentResponseData $flowData
      * @return $this

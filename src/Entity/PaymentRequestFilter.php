@@ -59,5 +59,4 @@ class PaymentRequestFilter extends Filter
         $this->set('method_key', $methodKey);
         return $this;
     }
-
 }

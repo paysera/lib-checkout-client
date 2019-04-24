@@ -11,7 +11,7 @@ This library provides `ClientFactory` class, which you should use to get the API
 ```php
 use Paysera\Client\CheckoutClient\ClientFactory;
 
-$clientFactory = ClientFactory::create([
+$clientFactory = new ClientFactory([
     'base_url' => 'https://checkout-eu-a.paysera.com/checkout/rest/v1/', // optional, in case you need a custom one.
     'basic' => [                                        // use this, it API requires Basic authentication.
         'username' => 'username',
@@ -35,6 +35,26 @@ Now, that you have instance of `CheckoutClient`, you can use following methods
 ### Methods
 
     
+Cancel payment request
+
+
+```php
+
+$result = $checkoutClient->cancelPaymentRequest($id);
+```
+---
+
+
+Get payment request public info
+
+
+```php
+
+$result = $checkoutClient->getPaymentRequestPublicInfo($id);
+```
+---
+
+
 Update payment request customer email
 
 
@@ -50,18 +70,20 @@ $result = $checkoutClient->setPaymentRequestEmail($id, $email);
 ---
 
 
-Get payment methods for a payment request
+Standard SQL-style Result filtering
 
 
 ```php
 use Paysera\Client\CheckoutClient\Entity as Entities;
 
-$filter = new Entities\Filter();
+$filter = new \Paysera\Component\RestClientCommon\Entity\Filter();
 
 $filter->setLimit($limit);
 $filter->setOffset($offset);
 $filter->setOrderBy($orderBy);
 $filter->setOrderDirection($orderDirection);
+$filter->setAfter($after);
+$filter->setBefore($before);
     
 $result = $checkoutClient->getPaymentRequestMethods($id, $filter);
 ```
@@ -154,16 +176,7 @@ $result = $checkoutClient->createPaymentRequest($paymentRequest);
 ```
 ---
 
-Cancel payment request
-
-
-```php
-
-$result = $checkoutClient->cancelPaymentRequest($id);
-```
----
-
-Payment request result filter
+Standard SQL-style Result filtering
 
 
 ```php

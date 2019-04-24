@@ -6,6 +6,11 @@ use Paysera\Component\RestClientCommon\Entity\Entity;
 
 class CardDataRestriction extends Entity
 {
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+    }
+
     /**
      * @return string|null
      */
@@ -13,6 +18,7 @@ class CardDataRestriction extends Entity
     {
         return $this->get('card_type');
     }
+
     /**
      * @param string $cardType
      * @return $this
@@ -22,6 +28,7 @@ class CardDataRestriction extends Entity
         $this->set('card_type', $cardType);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -29,6 +36,7 @@ class CardDataRestriction extends Entity
     {
         return $this->get('card_brand');
     }
+
     /**
      * @param string $cardBrand
      * @return $this

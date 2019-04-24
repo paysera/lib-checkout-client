@@ -6,6 +6,11 @@ use Paysera\Component\RestClientCommon\Entity\Entity;
 
 class Error extends Entity
 {
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+    }
+
     /**
      * @return string
      */
@@ -13,6 +18,7 @@ class Error extends Entity
     {
         return $this->get('error');
     }
+
     /**
      * @param string $error
      * @return $this
@@ -22,6 +28,7 @@ class Error extends Entity
         $this->set('error', $error);
         return $this;
     }
+
     /**
      * @return string
      */
@@ -29,6 +36,7 @@ class Error extends Entity
     {
         return $this->get('error_description');
     }
+
     /**
      * @param string $errorDescription
      * @return $this

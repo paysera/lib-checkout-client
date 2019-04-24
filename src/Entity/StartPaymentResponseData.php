@@ -8,6 +8,11 @@ class StartPaymentResponseData extends Entity
 {
     const METHOD_POST = 'POST';
 
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+    }
+
     /**
      * @return string|null
      */
@@ -15,6 +20,7 @@ class StartPaymentResponseData extends Entity
     {
         return $this->get('action_url');
     }
+
     /**
      * @param string $actionUrl
      * @return $this
@@ -24,6 +30,7 @@ class StartPaymentResponseData extends Entity
         $this->set('action_url', $actionUrl);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -31,6 +38,7 @@ class StartPaymentResponseData extends Entity
     {
         return $this->get('method');
     }
+
     /**
      * @param string $method
      * @return $this
@@ -40,22 +48,25 @@ class StartPaymentResponseData extends Entity
         $this->set('method', $method);
         return $this;
     }
+
     /**
      * @return object|null
      */
     public function getAutoPostData()
     {
-        return $this->getByReference('auto_post_data');
+return $this->getByReference('auto_post_data');
     }
+
     /**
      * @param object $autoPostData
      * @return $this
      */
     public function setAutoPostData($autoPostData)
     {
-        $this->set('auto_post_data', $autoPostData);
+        $this->setByReference('auto_post_data', $autoPostData);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -63,6 +74,7 @@ class StartPaymentResponseData extends Entity
     {
         return $this->get('redirect_url');
     }
+
     /**
      * @param string $redirectUrl
      * @return $this
@@ -72,6 +84,7 @@ class StartPaymentResponseData extends Entity
         $this->set('redirect_url', $redirectUrl);
         return $this;
     }
+
     /**
      * @return string|null
      */
@@ -79,6 +92,7 @@ class StartPaymentResponseData extends Entity
     {
         return $this->get('gateway_key');
     }
+
     /**
      * @param string $gatewayKey
      * @return $this
