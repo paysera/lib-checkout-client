@@ -1,6 +1,6 @@
 {
     "name": "paysera/lib-checkout-client",
-    "description": "CheckoutClient",
+    "description": "PHP REST Client for Paysera Checkout",
     "autoload": {
         "psr-4": {
             "Paysera\\Client\\CheckoutClient\\": "src"
