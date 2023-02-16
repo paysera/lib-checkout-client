@@ -6,7 +6,6 @@ use Paysera\Client\CheckoutClient\Entity as Entities;
 use Fig\Http\Message\RequestMethodInterface;
 use Paysera\Component\RestClientCommon\Client\ApiClient;
 use Paysera\Component\RestClientCommon\Entity\Filter;
-use Evp\Component\Money\Money;
 
 class CheckoutClient
 {
@@ -147,12 +146,12 @@ class CheckoutClient
      * @param string $id
      * @return Entities\PaymentRequest
      */
-    public function capturePaymentRequest($id)
+    public function capturePaymentRequest($id, Entities\CaptureParameters $captureParameters = null)
     {
         $request = $this->apiClient->createRequest(
             RequestMethodInterface::METHOD_PUT,
             sprintf('payment-requests/%s/capture', urlencode($id)),
-            null
+            $captureParameters
         );
         $data = $this->apiClient->makeRequest($request);
 
